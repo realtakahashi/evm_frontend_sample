@@ -39,6 +39,7 @@ export const callSetGreetFunction = async (
 ) => {
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
     const signer = provider.getSigner();
     const signerAddress = await signer.getAddress();
     const contract = new ethers.Contract(
@@ -69,6 +70,7 @@ export const callGetGreetFunction = async (
   let result = "";
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
     const signer = provider.getSigner();
     const signerAddress = await signer.getAddress();
     const contract = new ethers.Contract(
